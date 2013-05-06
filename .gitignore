@@ -1,0 +1,15 @@
+.bundle
+db/sphinx
+log/*
+tmp/*
+doc/app/**
+public/images/**
+.livereload
+.sass-cache
+zeus.json
+
+# Foreman env configuration
+.env
+
+# Permit devs provide their own rspec configuration
+.rspec
