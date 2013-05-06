@@ -2,9 +2,12 @@ source 'https://rubygems.org'
 
 gem 'rails'
 gem 'mongoid'
+gem 'thin'
+gem 'compass'
 
 group :assets do
   gem 'sass-rails'
+  gem 'slim'
   gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
 end
