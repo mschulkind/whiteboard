@@ -18,3 +18,11 @@ $ ->
         
         puts "#{x}, #{y}"
     )
+    
+  paper.setup(canvas.get(0))
+  path = new paper.Path
+  path.strokeColor = 'black'
+
+  path.add(new paper.Point(100, 100))
+  path.add(new paper.Point(200, 200))
+  paper.view.draw()
