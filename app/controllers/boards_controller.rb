@@ -17,16 +17,17 @@ class BoardsController < ApplicationController
     data = ActiveSupport::JSON.decode(params[:data])
 
     line = 
-      if line_id = data['line_id']
-        board.lines.find(line_id)
-      else
-        board.lines.create
-      end
+      board.lines.where(uuid: data['line_uuid']).first ||
+      board.lines.create(uuid: data['line_uuid'])
+    
+    PrivatePub.publish_to(
+      "/boards/#{params[:id]}",
+      "window.addPoints('#{line.uuid}', #{data['points'].to_json})")
     
     line.points.push(*data['points'].map do |point|
       Point.new(x: point['x'], y: point['y'])
     end)
 
-    render json: {line_id: line.id}
+    render json: {}
   end
 end

@@ -1,5 +1,7 @@
 #board
   script 
     | window.boardID = '#{params[:id]}';
-    | window.initialData = #{board_json};
+    | window.initialData = #{@board.to_json.html_safe};
   canvas#canvas
+
+  = subscribe_to "/boards/#{params[:id]}"

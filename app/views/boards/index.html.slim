@@ -1,2 +1,6 @@
-= form_tag '/boards' do
-  input type='submit' value='New Board'
+#boards
+  = form_tag '/boards' do
+    input type='submit' value='New Board'
+
+  - Board.all.each do |board|
+    a href="/boards/#{board.id}" board #{board.id}

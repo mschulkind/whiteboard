@@ -3,6 +3,8 @@
 #= require jquery.hammer
 #= require underscore
 #= require paper
+#= require private_pub
+#= require uuid
 #
 #= require_tree .
 

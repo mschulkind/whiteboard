@@ -1,19 +1,29 @@
 $ ->
   canvas = $('#canvas')
-
+  paper.setup(canvas.get(0))
+  
   resizeCanvas = ->
+    width = $(window).width() - 10
+    height = $(window).height() - 10
+
+    paper.view.viewSize = [width, height]
+
     canvas.css(
-      width: $(window).width() - 10
-      height: $(window).height() - 10
+      width: width
+      height: height
     )
+
+    paper.view.draw()
+
   $(window).on('resize', resizeCanvas)
   resizeCanvas()
-    
-  paper.setup(canvas.get(0))
-  path = null
-  lineID = null
+
+  currentPath = null
+  currentLineUUID = null
   queuedPoints = []
   requestInProgress = false
+  
+  lines = {}
 
   queueRequest = ->
     sendingPoints = queuedPoints
@@ -21,8 +31,7 @@ $ ->
 
     data =
       points: sendingPoints
-      
-    data.line_id = lineID if lineID
+      line_uuid: currentLineUUID
     
     requestInProgress = true
     $.ajax(
@@ -32,7 +41,6 @@ $ ->
         data: JSON.stringify(data)
       
       success: (data) ->
-        lineID = data.line_id
         
       error: ->
         alert 'error'
@@ -43,14 +51,28 @@ $ ->
 
   savePoint = (x, y) ->
     queuedPoints.push({x: x, y: y})
-    queueRequest() unless requestInProgress
+    _(-> queueRequest() unless requestInProgress).defer()
     
-  startPath = ->
+  createPath = ->
     path = new paper.Path
     path.strokeColor = 'red'
+    path
+    
+  startPath = ->
+    currentPath = createPath()
+    currentLineUUID = window.uuid.v1()
     
   addPoint = (x, y) ->
-    path.add(new paper.Point(x, y))
+    currentPath.add(new paper.Point(x, y))
+    
+  window.addPoints = (lineUUID, points) ->
+    unless lines[lineUUID] == true
+      path = lines[lineUUID] ||= createPath()
+      
+      for point in points
+        path.add(new paper.Point(point.x, point.y))
+        
+      paper.view.draw()
     
   for line in window.initialData.lines
     startPath()
@@ -64,8 +86,8 @@ $ ->
     hammer().
     on(
       dragstart: (e) ->
-        lineID = null
         startPath()
+        lines[currentLineUUID] = true
 
       drag: (e) ->
         x = e.gesture.center.pageX - 6

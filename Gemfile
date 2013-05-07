@@ -7,6 +7,7 @@ gem 'compass'
 gem 'jquery-rails'
 gem 'underscore-rails'
 gem 'awesome_print'
+gem 'private_pub'
 
 group :assets do
   gem 'sass-rails'
