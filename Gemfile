@@ -10,9 +10,9 @@ gem 'underscore-rails'
 gem 'awesome_print'
 gem 'private_pub'
 gem 'sass-rails'
+gem 'slim'
 
 group :assets do
-  gem 'slim'
   gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
 end
