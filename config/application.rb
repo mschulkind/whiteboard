@@ -5,11 +5,6 @@ require "action_mailer/railtie"
 require "active_resource/railtie"
 require "rails/test_unit/railtie"
 
-require "faye"
-require "private_pub"
-Faye::WebSocket.load_adapter('thin')
-PrivatePub.load_config(File.expand_path("../private_pub.yml", __FILE__), ENV["RAILS_ENV"] || "development")
-
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
