@@ -1,6 +1,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery.hammer
+#= require underscore
 #= require paper
 #
 #= require_tree .

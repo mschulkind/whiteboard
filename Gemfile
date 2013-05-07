@@ -4,6 +4,9 @@ gem 'rails'
 gem 'mongoid'
 gem 'thin'
 gem 'compass'
+gem 'jquery-rails'
+gem 'underscore-rails'
+gem 'awesome_print'
 
 group :assets do
   gem 'sass-rails'
@@ -17,4 +20,3 @@ group :development do
   gem 'guard-livereload'
 end
 
-gem 'jquery-rails'

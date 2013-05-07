@@ -1,2 +1,5 @@
 #board
+  script 
+    | window.boardID = '#{params[:id]}';
+    | window.initialData = #{board_json};
   canvas#canvas

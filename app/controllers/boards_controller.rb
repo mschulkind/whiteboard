@@ -12,6 +12,21 @@ class BoardsController < ApplicationController
   end
   
   def draw
+    board = Board.find(params[:id])
     
+    data = ActiveSupport::JSON.decode(params[:data])
+
+    line = 
+      if line_id = data['line_id']
+        board.lines.find(line_id)
+      else
+        board.lines.create
+      end
+    
+    line.points.push(*data['points'].map do |point|
+      Point.new(x: point['x'], y: point['y'])
+    end)
+
+    render json: {line_id: line.id}
   end
 end

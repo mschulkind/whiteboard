@@ -65,5 +65,8 @@ module Whiteboard
     config.sass.load_paths <<
       Gem.loaded_specs['compass'].full_gem_path +
         "/frameworks/compass/stylesheets"
+      
+    STDOUT.sync = true
+    config.logger = Logger.new(STDOUT)
   end
 end
