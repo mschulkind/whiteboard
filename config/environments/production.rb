@@ -52,7 +52,7 @@ Whiteboard::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Enable threaded mode
-  # config.threadsafe!
+  config.threadsafe!
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
@@ -64,4 +64,13 @@ Whiteboard::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  
+  require "faye"
+  require "private_pub"
+  Faye::WebSocket.load_adapter('thin')
+  PrivatePub.load_config(File.expand_path("../private_pub.yml", __FILE__), ENV["RAILS_ENV"] || "development")
+  config.middleware.use(Faye::RackAdapter, 
+    mount: '/faye', 
+    timeout: 45, 
+    extensions: [PrivatePub::FayeExtension.new])
 end

@@ -11,6 +11,7 @@ gem 'awesome_print'
 gem 'private_pub'
 gem 'sass-rails'
 gem 'slim'
+gem 'foreman'
 
 group :assets do
   gem 'coffee-rails'
