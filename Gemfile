@@ -9,9 +9,9 @@ gem 'jquery-rails'
 gem 'underscore-rails'
 gem 'awesome_print'
 gem 'private_pub'
+gem 'sass-rails'
 
 group :assets do
-  gem 'sass-rails'
   gem 'slim'
   gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
