@@ -68,7 +68,7 @@ Whiteboard::Application.configure do
   require "faye"
   require "private_pub"
   Faye::WebSocket.load_adapter('thin')
-  PrivatePub.load_config(File.expand_path("../private_pub.yml", __FILE__), ENV["RAILS_ENV"] || "development")
+  PrivatePub.load_config(File.expand_path("../../private_pub.yml", __FILE__), ENV["RAILS_ENV"] || "development")
   config.middleware.use(Faye::RackAdapter, 
     mount: '/faye', 
     timeout: 45, 
