@@ -82,4 +82,4 @@ test:
 production:
   sessions:
     default:
-      uri: <%= ENV['MONGOHQ_URL'] || ENV['MONGODB_ADDRESS'] %>
+      uri: mongodb://root:K929BRyEbWKzMSXXDkMr@whiteboard-mschulkind-db-0.azva.dotcloud.net:2357/whiteboard
